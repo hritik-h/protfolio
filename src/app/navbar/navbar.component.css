@@ -1,10 +1,23 @@
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('/assets/fonts/OTF/PPNeueMontreal-Medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'MyCustomFont2';
+    src: url('/assets/fonts/OTF/PPNeueMontreal-Thin.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
 .navbar-container{
     display: flex;
     gap: 18rem;
     padding-top: 1rem;
-    position: fixed;
     background-color: transparent;
     z-index: 99999;
+    justify-content: space-between;
 }
 
 .arrow-sign-go{
@@ -26,6 +39,8 @@
 }
 
 .logo-container{
+    width: 160px;
+    align-items: center;
     display: flex;
     line-height: 0rem;
     padding-left: 2rem;
@@ -40,28 +55,34 @@
 
 .links-to-profiles{
     padding-left: 2rem;
-    position: relative;
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
 }
 
 .middle-item{
     border-radius: 2rem;
-    background-color: transparent;
-    overflow: hidden;
-    width: 15rem;
+    background-color: var(--background-color-black);
+    position: relative;
+    width: 13rem;
     height: 3.5rem;
+    justify-content: center;
 }
 
 .middle-item-inner{
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f20d;
+    border-radius: 5rem;
+    height: 3.5rem;
     display: flex;
     position: relative;
-    gap: 3rem;
-    background-color: transparent;
-    backdrop-filter: blur(5px);
-    padding-left: 3.4rem;
+    backdrop-filter: blur(15px);
 }
 
 .name-profession{
     background-color: transparent;
+    width: 120px;
 }
 
 .logo{
@@ -74,4 +95,60 @@
 
 .transparent-background{
     background-color: transparent;
+}
+.pill{
+    width: 6rem;
+    height: 2.5rem;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 17rem;
+}
+.pill:hover{
+    background-color: #f2f2f230;
+}
+.pill-content{
+    display: flex;
+    justify-content: center;
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+    /* Move the middle item to the left */
+    .navbar-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .middle-item {
+      order: 1;
+      width: 100%;
+      text-align: left;
+    }
+  
+    /* Hide link-to-profiles */
+    .link-to-profiles {
+      display: none;
+    }
+  
+    /* Show button on smaller screens */
+    .link-button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+}
+
+.nav-indicator{
+    transition: margin 0.3s ease;
+    margin-left: 3rem;
+    border-radius: 3rem;
+    width: 24px;
+    height: .1rem;
+    background-color: var(--background-color-white);
+    box-shadow: 0 .3rem 1rem .3rem #fff;
 }
