@@ -18,6 +18,7 @@
     background-color: transparent;
     z-index: 99999;
     justify-content: space-between;
+    position:fixed;
 }
 
 .arrow-sign-go{
