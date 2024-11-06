@@ -12,6 +12,7 @@
   }
   
 .navbar-container{
+    width: 95%;
     display: flex;
     gap: 18rem;
     padding-top: 1rem;
@@ -55,15 +56,15 @@
 }
 
 .links-to-profiles{
-    padding-left: 2rem;
     justify-content: flex-end;
     display: flex;
     align-items: center;
+    gap: 1rem;
 }
 
 .middle-item{
     border-radius: 2rem;
-    background-color: var(--background-color-black);
+    background-color: transparent;
     position: relative;
     width: 13rem;
     height: 3.5rem;
@@ -78,7 +79,7 @@
     height: 3.5rem;
     display: flex;
     position: relative;
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(7px);
 }
 
 .name-profession{
