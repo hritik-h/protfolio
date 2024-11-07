@@ -12,12 +12,12 @@
   <div class="middle-item">
     <div class="nav-indicator" [style.margin-left] = 'marginLeft'></div>
     <div class="middle-item-inner">
-      <div class="pill" (click) = "indicatorPositionChange('work')">
+      <div class="pill" (click) = "indicatorPositionChange('work')" (click) = "navigate('work')">
         <div class="transparent-background pill-content">
           Work
         </div>
       </div>
-      <div class="pill" (click) = "indicatorPositionChange('info')">
+      <div class="pill" (click) = "indicatorPositionChange('info')" routerLink="info" (click) = "navigate('info')">
         <div class="transparent-background pill-content">
           Info
         </div>
@@ -26,13 +26,17 @@
   </div>
       <!-- Only show link-to-profiles if showLinks is true -->
       <div *ngIf="showLinks" class="links-to-profiles">
-        <div class="link-to-profiles">
+        <a class="link-to-profiles" href="https://www.linkedin.com/in/hritik-kumar-s-b20bb2134/">
           <h4 class="transparent-background">LinkedIn</h4>
-          <img src="assets/diagonal-arrow-right-up-outline.svg" class="arrow-sign-go" />
-        </div>
+          <div class="arrow-sign-go" >
+            <img src="assets/diagonal-arrow-right-up-outline.svg" class="transparent-background"/>
+          </div>
+        </a>
         <div class="link-to-profiles">
           <h4 class="transparent-background">Resume</h4>
-          <img src="assets/diagonal-arrow-right-up-outline.svg" class="arrow-sign-go" />
+          <div class="arrow-sign-go" >
+            <img src="assets/diagonal-arrow-right-up-outline.svg" class="transparent-background"/>
+          </div>
         </div>
       </div>
 

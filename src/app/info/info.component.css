@@ -1,0 +1,19 @@
+.main-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+.left-wrapper{
+    height: 100vw;
+    flex-grow: 1;
+}
+.right-wrapper{
+    height: 100vw;
+    background-color: white;
+    flex-grow: 1;
+}
+
+.chessboard {
+    background: repeating-conic-gradient(#e2d2d2 0% 25%, transparent 0% 50%) 
+    50% / 260px 260px
+  }
+  

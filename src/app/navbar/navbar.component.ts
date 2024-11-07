@@ -1,6 +1,7 @@
 import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,8 @@ export class NavbarComponent implements OnInit {
   marginLeft = '3rem';
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private route: Router,
   ) {}
 
   ngOnInit() {
@@ -35,5 +37,12 @@ export class NavbarComponent implements OnInit {
 
   toggleLinks() {
     this.showLinks = !this.showLinks;
+  }
+  navigate(section:any) {
+    if(section == 'info'){
+      this.route.navigate([section]);
+    } else{
+      this.route.navigate([""])
+    }
   }
 }

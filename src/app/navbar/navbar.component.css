@@ -28,6 +28,8 @@
     padding-top: 1.4rem;
     padding-bottom: 0.4rem;
     background-color: transparent;
+    margin-bottom: 1rem;
+    background-color: transparent;
 }
 
 .tibetian-text{
@@ -52,6 +54,10 @@
 
 .link-to-profiles{
     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 7rem;
+    height: 3rem;
 
 }
 
@@ -93,8 +99,12 @@
 
 .link-to-profiles{
     background-color: transparent;
+    border-radius: 17rem;
 }
 
+.link-to-profiles:hover{
+    background-color: #f2f2f230;
+}
 .transparent-background{
     background-color: transparent;
 }
