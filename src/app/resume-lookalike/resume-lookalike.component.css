@@ -1,0 +1,119 @@
+/* Center the paper on screen */
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #000000;
+    background-color: #f0f0f0;
+    font-family: 'Georgia', serif;
+  }
+  
+  .section{
+    background-color: #f0f0f0;
+    color: black;
+  }
+  /* A4 Paper with sketch border and texture */
+  .resume {
+    position: relative;
+    width: 794px;
+    min-height: 1123px;
+    padding: 2rem 3rem;
+    background-color: #fff;
+    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    border: 2px solid transparent;
+  
+    /* Sketch border using SVG mask and drop-shadow */
+    filter: drop-shadow(0px 0px 1px rgba(0,0,0,0.3)) drop-shadow(1px 1px 0px rgba(0,0,0,0.1));
+  }
+  
+  /* Sections */
+  .resume header {
+    text-align: center;
+    margin-bottom: 2rem;
+    background-color: #f0f0f0;
+    color: black;
+  }
+  
+  .resume header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    background-color: #f0f0f0;
+    color: black;
+  }
+  
+  .resume header p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    background-color: #f0f0f0;
+    color: black;
+  }
+  
+  .resume header a {
+    background-color: #f0f0f0;
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  .resume section {
+    background-color: #f0f0f0;
+    color: black;
+    margin-bottom: 2rem;
+  }
+  
+  .resume section h2 {
+    background-color: #f0f0f0;
+    color: black;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 2px;
+  }
+  
+  .resume .item {
+    margin-bottom: 1rem;
+    background-color: #f0f0f0;
+    color: black;
+  }
+  
+  .resume .item h3 {
+    background-color: #f0f0f0;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+  }
+  
+  .resume .item p {
+    background-color: #f0f0f0;
+    color: black;
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+  }
+  
+  .resume .item ul,
+  .resume section ul {
+    background-color: #f0f0f0;
+    color: black;
+    padding-left: 1.2rem;
+    margin-top: 0.3rem;
+  }
+  
+  .resume ul li {
+    background-color: #f0f0f0;
+    color: black;
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .courses{
+    background-color: #f0f0f0;
+    color: black;
+  }
+  
+  .default-class{
+    background-color: #f0f0f0;
+    color: black;
+  }

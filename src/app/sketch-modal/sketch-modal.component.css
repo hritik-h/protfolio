@@ -1,0 +1,173 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  transform: scale(1);
+  z-index: 1000;
+}
+
+/* === Background fade === */
+.modal-background {
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  backdrop-filter: blur(6px) !important;
+}
+
+.modal {
+  position: relative;
+  padding: 2rem;
+  background-color: transparent;
+  border: none;
+  animation: modalFadeIn 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  text-align: center;
+  height: 70vh; /* Set a maximum height for the modal (e.g., 80% of the viewport height) */
+  overflow: hidden;
+  /* Hide scrollbar in Chrome, Safari, Edge */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  margin-top: 3rem;
+}
+
+
+.modal-content {
+  height: 100%; /* 🔹 Take full height of modal */
+  overflow-y: auto; /* 🔹 Makes content scrollable inside */
+  padding: 16px; /* Optional padding for content */
+}
+
+/* For Chrome, Safari, and newer Edge */
+.modal-content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.modal h2,
+.modal p {
+  opacity: 0;
+  position: relative;
+  animation: modalContentFadeIn 0.5s 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+/* === SVG Border Sketch === */
+.modal-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+
+.modal-svg rect {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+
+  stroke-dasharray: 100rem; /* 1000px total */
+  stroke-dashoffset: 10rem;
+
+  visibility: hidden;
+
+  animation: sketchIn 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+  to {
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalFadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+@keyframes modalContentFadeIn {
+  to {
+    opacity: 1;
+    top: 0;
+  }
+}
+
+@keyframes modalContentFadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes sketchIn {
+  0% {
+    stroke-dashoffset: 880;
+    visibility: visible;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    visibility: visible;
+  }
+}
+
+@keyframes sketchOut {
+  0% {
+    stroke-dashoffset: 0;
+    visibility: visible;
+  }
+  100% {
+    stroke-dashoffset: 880;
+    visibility: hidden;
+  }
+}
+
+/* === Closing === */
+.six.out {
+  animation: quickScaleDown 0s 0.5s linear forwards;
+}
+
+.six.out .modal-background {
+  animation: fadeOut 0.5s forwards;
+}
+
+.six.out .modal {
+  animation: modalFadeOut 0.5s forwards;
+}
+
+.six.out .modal h2,
+.six.out .modal p {
+  animation: modalContentFadeOut 0.5s forwards;
+}
+
+.six.out .modal-svg rect {
+  animation: sketchOut 0.5s forwards;
+}
+
+.six {
+  background-color: transparent;
+  backdrop-filter: blur(4px);
+}

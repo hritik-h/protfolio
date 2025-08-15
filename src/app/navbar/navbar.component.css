@@ -58,6 +58,7 @@
     justify-content: center;
     width: 7rem;
     height: 3rem;
+    cursor: pointer;
 
 }
 
@@ -165,3 +166,6 @@
     background-color: var(--background-color-white);
     box-shadow: 0 .3rem 1rem .3rem #fff;
 }
+a {
+    text-decoration: none !important;
+  }

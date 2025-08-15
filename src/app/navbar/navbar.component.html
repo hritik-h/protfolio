@@ -26,13 +26,13 @@
   </div>
       <!-- Only show link-to-profiles if showLinks is true -->
       <div *ngIf="showLinks" class="links-to-profiles">
-        <a class="link-to-profiles" href="https://www.linkedin.com/in/hritik-kumar-s-b20bb2134/">
+        <a class="link-to-profiles" href="https://www.linkedin.com/in/hritik-kumar-s-b20bb2134/" target = "_blank">
           <h4 class="transparent-background">LinkedIn</h4>
           <div class="arrow-sign-go" >
             <img src="assets/diagonal-arrow-right-up-outline.svg" class="transparent-background"/>
           </div>
         </a>
-        <div class="link-to-profiles">
+        <div class="link-to-profiles" (click)="openModal()" >
           <h4 class="transparent-background">Resume</h4>
           <div class="arrow-sign-go" >
             <img src="assets/diagonal-arrow-right-up-outline.svg" class="transparent-background"/>
@@ -43,4 +43,6 @@
       <!-- Button to toggle links visibility on smaller screens -->
       <button class="link-button" (click)="toggleLinks()" *ngIf="!showLinks">Profiles</button>
     </div>
+    <!-- <app-resume-lookalike *ngIf="isModalOpen"></app-resume-lookalike> -->
+    <app-sketch-modal *ngIf="isModalOpen"></app-sketch-modal>
     
