@@ -33,6 +33,14 @@ export class SketchModalComponent {
     rect.classList.add('sketch-animate');
   }
 
+  downloadResume() {
+    // Example: trigger file download
+    const link = document.createElement('a');
+    link.href = 'assets/resume.pdf'; // Replace with your resume path
+    link.download = 'My_Resume.pdf';
+    link.click();
+  }
+  
   closeModal() {
     this.isClosing = true;
     setTimeout(() => {
