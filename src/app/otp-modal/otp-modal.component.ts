@@ -56,7 +56,7 @@ export class OtpModalComponent {
           const url = window.URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
-          a.download = 'Hrithik_Resume.pdf';
+          a.download = 'Hritik_Resume.pdf';
           a.click();
           window.URL.revokeObjectURL(url);
         },

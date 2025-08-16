@@ -16,7 +16,6 @@ export class ServicesService {
       .set('email', email)
       .set('otp', otp);
 
-      debugger
     return this.http.get(`${this.baseUrl}resume/download`, {
       params,
       responseType: 'blob' // to receive binary PDF
