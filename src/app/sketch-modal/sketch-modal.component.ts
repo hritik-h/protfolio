@@ -2,22 +2,26 @@ import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ResumeLookalikeComponent } from '../resume-lookalike/resume-lookalike.component';
-
+import { OtpModalComponent } from '../otp-modal/otp-modal.component';
 @Component({
   selector: 'app-sketch-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, ResumeLookalikeComponent],
+  imports: [CommonModule, FormsModule, ResumeLookalikeComponent, OtpModalComponent],
   templateUrl: './sketch-modal.component.html',
   styleUrls: ['./sketch-modal.component.css']
 })
 export class SketchModalComponent {
-  email: string = '';
   isClosing = false;
+  showOtpModal = false;
 
   @ViewChild('borderRect') borderRect!: ElementRef<SVGRectElement>;
 
   constructor(private renderer: Renderer2) {}
 
+  openOtpModal() {
+    this.showOtpModal = true;
+  }
+  
   ngAfterViewInit() {
     const rect = this.borderRect.nativeElement;
     const length = rect.getTotalLength();
@@ -33,13 +37,6 @@ export class SketchModalComponent {
     rect.classList.add('sketch-animate');
   }
 
-  downloadResume() {
-    // Example: trigger file download
-    const link = document.createElement('a');
-    link.href = 'assets/resume.pdf'; // Replace with your resume path
-    link.download = 'My_Resume.pdf';
-    link.click();
-  }
   
   closeModal() {
     this.isClosing = true;

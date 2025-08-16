@@ -1,0 +1,20 @@
+<div class="otp-modal-overlay" (click)="close()">
+    <div class="otp-modal" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="close()">✖</button>
+  
+      <h3>Verify Email</h3>
+  
+      <!-- Email input -->
+      <div class="input-group">
+        <input type="email" [(ngModel)]="email" placeholder="Enter your email" />
+        <button (click)="sendOtp()" [disabled]="otpSent">Send OTP</button>
+      </div>
+  
+      <!-- OTP input -->
+      <div class="input-group" *ngIf="otpSent">
+        <input type="text" [(ngModel)]="otp" placeholder="Enter OTP" />
+        <button (click)="downloadResume()">Download</button>
+      </div>
+    </div>
+  </div>
+  
