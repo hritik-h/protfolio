@@ -1,8 +1,18 @@
 <div class="main-wrapper">
-    <div class="left-wrapper">
+    <!-- <div class="left-wrapper">
         
     </div>
     <div class="right-wrapper chessboard">
           
+    </div> -->
+    <div class="card-holder">
+    <app-card
+      *ngFor="let card of cards; let i = index"
+      [title]="card.title"
+      [description]="card.description"
+      [style.zIndex]="cards.length - i"
+      [backgroundColor] = "card.color"
+      class="card-{{i}}">
+    </app-card>
     </div>
 </div>

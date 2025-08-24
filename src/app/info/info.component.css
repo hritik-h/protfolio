@@ -1,6 +1,11 @@
+* {
+  transition: background 0.5s ease, white 0.5s ease;
+}
+
 .main-wrapper{
     display: flex;
     flex-wrap: wrap;
+    position: relative;
 }
 .left-wrapper{
     height: 100vw;
@@ -16,4 +21,17 @@
     background: repeating-conic-gradient(#e2d2d2 0% 25%, transparent 0% 50%) 
     50% / 260px 260px
   }
+
+  .card-holder {
+    padding: 20rem;
+    position: relative;
+    width: 320px;
+    height: 500px;
+    overflow-y: scroll;
+    perspective: 1000px;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+  }
   
+  .card-holder::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome/Safari */
+  }

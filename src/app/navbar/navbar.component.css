@@ -38,12 +38,12 @@
 }
 .logo-img{
     height: 3rem;
-    width: 2rem;
+    width: 4rem;
     border-radius: 0.3rem;
 }
 
 .logo-container{
-    width: 160px;
+    width: 186px;
     align-items: center;
     display: flex;
     line-height: 0rem;
