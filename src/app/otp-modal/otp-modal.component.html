@@ -1,20 +1,107 @@
-<div class="otp-modal-overlay" (click)="close()">
-    <div class="otp-modal" (click)="$event.stopPropagation()">
-      <button class="close-btn" (click)="close()">✖</button>
-  
-      <h3>Verify Email</h3>
-  
-      <!-- Email input -->
-      <div class="input-group">
-        <input type="email" [(ngModel)]="email" placeholder="Enter your email" />
-        <button (click)="sendOtp()" [disabled]="otpSent">Send OTP</button>
+<div class="modal-overlay" [class.closing]="isClosing" (click)="close()">
+  <div class="modal-container" [class.closing]="isClosing" (click)="$event.stopPropagation()">
+    
+    <!-- Close button -->
+    <button class="close-button" (click)="close()" aria-label="Close modal">
+      <svg class="transparent" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      
+      <!-- Header -->
+      <div class="modal-header">
+        <div class="icon-container">
+          <svg class="transparent" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 2H2v20h20V2zM7 9h10M7 15h10"/>
+          </svg>
+        </div>
+        <h2 class="modal-title">Verify Your Email</h2>
+        <p class="modal-subtitle">Enter your email to receive a secure OTP for downloading the resume</p>
       </div>
-  
-      <!-- OTP input -->
-      <div class="input-group" *ngIf="otpSent">
-        <input type="text" [(ngModel)]="otp" placeholder="Enter OTP" />
-        <button (click)="downloadResume()">Download</button>
+
+      <!-- Email Section -->
+      <div class="form-section" [class.hidden]="otpSent">
+        <div class="input-wrapper">
+          <div class="transparent input-icon">
+            <svg class="transparent" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <input 
+            type="email" 
+            [(ngModel)]="email" 
+            placeholder="Enter your email address"
+            class="form-input"
+            [class.error]="emailError"
+          />
+        </div>
+        <button 
+          (click)="sendOtp()" 
+          [disabled]="!email || isSending"
+          class="primary-button"
+          [class.loading]="isSending"
+        >
+          <span class="transparent button-text" *ngIf="!isSending">Send OTP</span>
+          <span class="transparent button-text" *ngIf="isSending">Sending...</span>
+          <div class="spinner" *ngIf="isSending"></div>
+        </button>
       </div>
+
+      <!-- OTP Section -->
+      <div class="form-section" [class.visible]="otpSent">
+        <div class="success-message">
+          <svg class="transparent" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22,4 12,14.01 9,11.01"/>
+          </svg>
+          <span class="transparent">OTP sent successfully!</span>
+        </div>
+        
+        <div class="input-wrapper">
+          <div class="transparent input-icon">
+            <svg class="transparent" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <circle cx="12" cy="16" r="1"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <input 
+            type="text" 
+            [(ngModel)]="otp" 
+            placeholder="Enter 6-digit OTP"
+            class="form-input"
+            maxlength="6"
+            [class.error]="otpError"
+          />
+        </div>
+        
+        <button 
+          (click)="downloadResume()" 
+          [disabled]="!otp || otp.length < 6 || isDownloading"
+          class="primary-button"
+          [class.loading]="isDownloading"
+        >
+          <span class="transparent button-text" *ngIf="!isDownloading">Download Resume</span>
+          <span class="transparent button-text" *ngIf="isDownloading">Downloading...</span>
+          <div class="spinner" *ngIf="isDownloading"></div>
+        </button>
+        
+        <button 
+          (click)="resendOtp()" 
+          [disabled]="isResending"
+          class="secondary-button"
+        >
+          <span class="transparent" *ngIf="!isResending">Resend OTP</span>
+          <span class="transparent" *ngIf="isResending">Resending...</span>
+        </button>
+      </div>
+
     </div>
   </div>
+</div>
   
