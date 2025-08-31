@@ -82,7 +82,7 @@
         
         <button 
           (click)="downloadResume()" 
-          [disabled]="!otp || otp.length < 6 || isDownloading"
+          [disabled]="!otp || otp.length < 3 || isDownloading"
           class="primary-button"
           [class.loading]="isDownloading"
         >
