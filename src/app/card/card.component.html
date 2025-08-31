@@ -13,7 +13,8 @@
                     <div class="dot green"></div>
                 </div>
             </div>
-            <div class="window-content" [style.background-color]="backgroundColor">
+            <div class="window-content" [ngStyle]="{'background': 'linear-gradient(to bottom, ' + backgroundColor +', white)'}">
+                <img [src]="img" alt="Overlay" [class]="imgClass">
                 <div class="hero-text-content">
                     <div class="text-hero">
                         {{title}}

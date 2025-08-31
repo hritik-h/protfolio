@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, HostBinding } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,16 +6,27 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './card.component.html',
-  styleUrl: './card.component.css'
+  styleUrls: ['./card.component.css'] // <-- use styleUrls (plural)
 })
-export class CardComponent {
+export class CardComponent implements OnInit {
   @Input() title!: string;
   @Input() description!: string;
   @Input() index!: number;
   @Input() backgroundColor!: string;
-  constructor(){
-    const height = `${30 - this.index}rem`;
-    const width = `${20 - this.index * 0.5}rem`;
+  @Input() asset!: string;
+
+  @Input() disableHover = false;
+
+  // Reflect the input as a class on the host element
+  @HostBinding('class.no-hover') get noHover() { 
+    return this.disableHover; 
   }
 
+  img!: string;
+  imgClass!: string;
+
+  ngOnInit(): void {
+    this.img = 'assets/' + this.asset + '.png';
+    this.imgClass = this.asset + '-overlay';
+  }
 }

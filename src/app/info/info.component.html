@@ -10,8 +10,11 @@
       *ngFor="let card of cards; let i = index"
       [title]="card.title"
       [description]="card.description"
+      [asset]="card.asset"
+      [index]="i+1"
       [style.zIndex]="cards.length - i"
       [backgroundColor] = "card.color"
+      [disableHover] = "isScrolling"
       class="card-{{i}}">
     </app-card>
     </div>

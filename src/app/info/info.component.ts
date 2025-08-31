@@ -13,17 +13,23 @@ import { gsap } from 'gsap';
 })
 export class InfoComponent implements AfterViewInit {
   cards: Card[] = [
-    { title: 'Core Java', description: 'Excluding Java 8 Features', color: '#00b894' },
-    { title: 'Java 8', description: 'Java 8 Features', color: '#a29bfe' },
-    { title: 'Microservices', description: 'Microservices Notes', color: '#fdcb6e' },
-    { title: 'System Design', description: 'System Design Prep', color: '#e17055' },
-    { title: 'Spring Boot', description: 'Spring Boot in Depth', color: '#6c5ce7' }
+    { title: 'Core Java', description: 'Comprehensive guide excluding Java 8', color: '#A61027', asset:'farmer' },
+{ title: 'Java 8', description: 'Detailed notes on Java 8 features', color: '#A61027', asset:'man-1' },
+{ title: 'Microservices', description: 'Essential concepts for microservices architecture', color: '#A61027', asset:'man-2' },
+{ title: 'System Design', description: 'Key patterns for scalable system design', color: '#A61027', asset:'man-4' },
+{ title: 'Spring Boot', description: 'In-depth overview of Spring Boot essentials', color: '#A61027', asset:'man-5' }
+
   ];
 
   private speed = 0;
   private spacing = 300;
   private animationFrame: number | null = null;
+  private scrollTimeout: any; // Declare scrollTimeout property
+  isScrolling = false;
   private cardElements: HTMLElement[] = [];
+  private cardPositions: number[] = [];
+  private totalWidth: number = 0;
+  private centerX: number = 0;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -32,47 +38,92 @@ export class InfoComponent implements AfterViewInit {
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.cardElements = this.cardRefs.toArray().map(el => el.nativeElement);
-      const centerX = window.innerWidth / 2;
+      this.centerX = window.innerWidth / 2;
+      this.totalWidth = this.spacing * this.cardElements.length;
+
+      // Initialize positions array
+      this.cardPositions = this.cardElements.map((_, index) => index * this.spacing);
 
       // Initial positions
       this.cardElements.forEach((card, index) => {
-        gsap.set(card, { x: index * this.spacing, scale: 0.8 });
+        gsap.set(card, { x: this.cardPositions[index], scale: 0.8 });
       });
 
       // Start infinite animation loop
-      this.animate(centerX);
+      this.animate();
     }
   }
 
+
+private markScrolling() {
+  this.isScrolling = true;
+  clearTimeout(this.scrollTimeout);
+  this.scrollTimeout = setTimeout(() => this.isScrolling = false, 150);
+}
+
+  @HostListener('window:scroll',['$event'])
+  onScroll(){
+    this.isScrolling = true;
+    clearTimeout(this.scrollTimeout);
+    this.scrollTimeout = setTimeout(()=>{
+      this.isScrolling = false;
+    },150);
+  }
   @HostListener('wheel', ['$event'])
-  onWheel(event: WheelEvent) {
-    if (isPlatformBrowser(this.platformId)) {
-      event.preventDefault(); // Prevent page from scrolling
-      this.speed += event.deltaY * -0.2; // Scroll down → move left, scroll up → move right
-    }
-  }
+onWheel(event: WheelEvent) {
+  event.preventDefault();
+  this.speed += event.deltaY * -0.04;
+  this.markScrolling(); // <--- added
+}
 
-  private animate(centerX: number) {
+
+  private animate() {
     this.speed *= 0.9; // Smooth deceleration
 
-    this.cardElements.forEach(card => {
-      let x = (gsap.getProperty(card, 'x') as number) + this.speed;
+    if (Math.abs(this.speed) > 0.05) {
+      this.markScrolling(); 
+    }
+    
+    // Batch DOM updates for better performance
+    const updates: Array<{element: HTMLElement, props: any}> = [];
+    
+    this.cardElements.forEach((card, index) => {
+      // Update position in our tracking array
+      this.cardPositions[index] += this.speed;
+      let x = this.cardPositions[index];
 
-      // Wrap-around logic
-      if (x < -this.spacing) {
-        x += this.spacing * this.cardElements.length;
-      } else if (x > this.spacing * (this.cardElements.length - 1)) {
-        x -= this.spacing * this.cardElements.length;
+      // Wrap-around logic with proper boundaries
+      const leftBoundary = -this.spacing;
+      const rightBoundary = this.totalWidth - this.spacing;
+      
+      if (x < leftBoundary) {
+        x += this.totalWidth;
+        this.cardPositions[index] = x;
+      } else if (x > rightBoundary) {
+        x -= this.totalWidth;
+        this.cardPositions[index] = x;
       }
 
-      // Scale based on distance from center
-      const distanceFromCenter = Math.abs((x + centerX) - centerX);
-      const scale = gsap.utils.mapRange(0, centerX, 1.2, 0.6, distanceFromCenter);
+      // Calculate scale based on distance from center (optimized)
+      const distanceFromCenter = Math.abs(x);
+      const scale = Math.max(0.6, Math.min(1.2, 1.2 - (distanceFromCenter / this.centerX) * 0.6));
 
-      gsap.set(card, { x, scale, zIndex: Math.round(1000 - distanceFromCenter) });
+      updates.push({
+        element: card,
+        props: { 
+          x, 
+          scale, 
+          zIndex: Math.round(1000 - distanceFromCenter) 
+        }
+      });
     });
 
-    this.animationFrame = requestAnimationFrame(() => this.animate(centerX));
+    // Apply all updates in a single batch
+    updates.forEach(update => {
+      gsap.set(update.element, update.props);
+    });
+
+    this.animationFrame = requestAnimationFrame(() => this.animate());
   }
 }
 
