@@ -84,7 +84,7 @@ export class OtpModalComponent {
   }
 
   downloadResume() {
-    if (!this.otp || this.otp.length < 6) {
+    if (!this.otp || this.otp.length < 3) {
       this.otpError = true;
       return;
     }
